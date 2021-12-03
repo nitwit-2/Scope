@@ -1,0 +1,49 @@
+401
+cryptography
+	ceasar cipher - rotation cipher
+		a b c d e f g h i j k l m n o p q r s t u v w x y z
+		d e f g h i j k l m n o p q r s t u v w x y z a b c 
+
+	enigma cipher - machine used to encrypt / decrypt
+
+digital standard 
+	3des - 56 bit key size 
+		uses 3 keys 
+			first key to encrypt he plaintext 
+			second key used to decrypt the ciphertext from first round 
+			third key used to encrypt the cipher text from the second text
+
+advanced encryption standard 
+	rijnael - supports multiple key lengths 
+		aes 128 - 256 bits
+
+402
+cryptography
+   aescrypt
+	vi plaintext.txt 
+	aescrypt -e -p mypass plaintext.txt
+	cat plaintext.txt.aes
+	aescrrypt -d -p mypass plaintext.txt.aes
+   openssl
+	openssl genrsa -des3 -out private.key 4096
+	enter pass phrase for private.key
+	openssl rsa -in private.key -pubout -out public.key
+	openssl rsautl -encrpyt -pubin -inkey public.key -in "text.txt" -out encrypted.txt
+	cat encrypted.txt
+	openssl rsautl -decrypt -inkey private.key -in encrypted.txt -out newplaintext.txt
+	diff newplaintext.txt plaintext.txt
+403
+public key cryptography
+   x509 certificate (centralized)
+	openssl rsa -noout -text -in server.key (private key)
+	openssl x509 -noout -text -in server.key (public key)
+
+   pgp (decentralized) - corrupted video
+	sudo apt-get install gnupg
+	gpg --gen-key
+	gpg --export -a "User Name" > public.key
+	gpg --export-secret-key -a "User Name" > private.key
+	gpg --list-keys
+	gpg --list-secret-keys
+	gpg -e -u "Sender User Name" -r "Receiever User Name" somefile
+	gpg -d mydata.txt.gpg
