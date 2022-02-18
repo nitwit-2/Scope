@@ -1,0 +1,22 @@
+scenario -  A user can't get into his redhat box 
+RLO - Setup sshd 
+additional task - do writeup
+
+SERVER -
+
+su - 
+dnf install openssh-server
+exit 
+
+systemctl status sshd (active or inactive) 
+systemctl enable sshd 
+firewall-cmd --list-all (verify ssh as a service)  
+firewall-cmd --zone-public --perminaent --add-service=ssh
+firewall-cmd -reload 
+firewall-cmd --list-all (verify ssh as a service)  
+ifconfig (verify server and client is on same network) 
+
+CLIENT -
+ssh <user>@ip-address 
+add fingerprint 
+your in!
